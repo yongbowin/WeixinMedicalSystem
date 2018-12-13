@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clouds.igankong.mapper.HandHealthMapper" >
+  <resultMap id="BaseResultMap" type="com.clouds.igankong.po.HandHealth" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="h_openID" property="hOpenid" jdbcType="VARCHAR" />
+    <result column="h_time" property="hTime" jdbcType="VARCHAR" />
+    <result column="h_department" property="hDepartment" jdbcType="VARCHAR" />
+    <result column="h_department_sub" property="hDepartmentSub" jdbcType="VARCHAR" />
+    <result column="h_role" property="hRole" jdbcType="VARCHAR" />
+    <result column="h_behavior" property="hBehavior" jdbcType="VARCHAR" />
+    <result column="h_sign" property="hSign" jdbcType="VARCHAR" />
+    <result column="h_userid" property="hUserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, h_openID, h_time, h_department, h_department_sub, h_role, h_behavior, h_sign, 
+    h_userid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clouds.igankong.po.HandHealthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hand_health
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hand_health
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hand_health
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clouds.igankong.po.HandHealthExample" >
+    delete from hand_health
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clouds.igankong.po.HandHealth" >
+    insert into hand_health (ID, h_openID, h_time, 
+      h_department, h_department_sub, h_role, 
+      h_behavior, h_sign, h_userid
+      )
+    values (#{id,jdbcType=INTEGER}, #{hOpenid,jdbcType=VARCHAR}, #{hTime,jdbcType=VARCHAR}, 
+      #{hDepartment,jdbcType=VARCHAR}, #{hDepartmentSub,jdbcType=VARCHAR}, #{hRole,jdbcType=VARCHAR}, 
+      #{hBehavior,jdbcType=VARCHAR}, #{hSign,jdbcType=VARCHAR}, #{hUserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clouds.igankong.po.HandHealth" >
+    insert into hand_health
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="hOpenid != null" >
+        h_openID,
+      </if>
+      <if test="hTime != null" >
+        h_time,
+      </if>
+      <if test="hDepartment != null" >
+        h_department,
+      </if>
+      <if test="hDepartmentSub != null" >
+        h_department_sub,
+      </if>
+      <if test="hRole != null" >
+        h_role,
+      </if>
+      <if test="hBehavior != null" >
+        h_behavior,
+      </if>
+      <if test="hSign != null" >
+        h_sign,
+      </if>
+      <if test="hUserid != null" >
+        h_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hOpenid != null" >
+        #{hOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="hTime != null" >
+        #{hTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hDepartment != null" >
+        #{hDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="hDepartmentSub != null" >
+        #{hDepartmentSub,jdbcType=VARCHAR},
+      </if>
+      <if test="hRole != null" >
+        #{hRole,jdbcType=VARCHAR},
+      </if>
+      <if test="hBehavior != null" >
+        #{hBehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="hSign != null" >
+        #{hSign,jdbcType=VARCHAR},
+      </if>
+      <if test="hUserid != null" >
+        #{hUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clouds.igankong.po.HandHealthExample" resultType="java.lang.Integer" >
+    select count(*) from hand_health
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hand_health
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hOpenid != null" >
+        h_openID = #{record.hOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hTime != null" >
+        h_time = #{record.hTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hDepartment != null" >
+        h_department = #{record.hDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hDepartmentSub != null" >
+        h_department_sub = #{record.hDepartmentSub,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hRole != null" >
+        h_role = #{record.hRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hBehavior != null" >
+        h_behavior = #{record.hBehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hSign != null" >
+        h_sign = #{record.hSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hUserid != null" >
+        h_userid = #{record.hUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hand_health
+    set ID = #{record.id,jdbcType=INTEGER},
+      h_openID = #{record.hOpenid,jdbcType=VARCHAR},
+      h_time = #{record.hTime,jdbcType=VARCHAR},
+      h_department = #{record.hDepartment,jdbcType=VARCHAR},
+      h_department_sub = #{record.hDepartmentSub,jdbcType=VARCHAR},
+      h_role = #{record.hRole,jdbcType=VARCHAR},
+      h_behavior = #{record.hBehavior,jdbcType=VARCHAR},
+      h_sign = #{record.hSign,jdbcType=VARCHAR},
+      h_userid = #{record.hUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clouds.igankong.po.HandHealth" >
+    update hand_health
+    <set >
+      <if test="hOpenid != null" >
+        h_openID = #{hOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="hTime != null" >
+        h_time = #{hTime,jdbcType=VARCHAR},
+      </if>
+      <if test="hDepartment != null" >
+        h_department = #{hDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="hDepartmentSub != null" >
+        h_department_sub = #{hDepartmentSub,jdbcType=VARCHAR},
+      </if>
+      <if test="hRole != null" >
+        h_role = #{hRole,jdbcType=VARCHAR},
+      </if>
+      <if test="hBehavior != null" >
+        h_behavior = #{hBehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="hSign != null" >
+        h_sign = #{hSign,jdbcType=VARCHAR},
+      </if>
+      <if test="hUserid != null" >
+        h_userid = #{hUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clouds.igankong.po.HandHealth" >
+    update hand_health
+    set h_openID = #{hOpenid,jdbcType=VARCHAR},
+      h_time = #{hTime,jdbcType=VARCHAR},
+      h_department = #{hDepartment,jdbcType=VARCHAR},
+      h_department_sub = #{hDepartmentSub,jdbcType=VARCHAR},
+      h_role = #{hRole,jdbcType=VARCHAR},
+      h_behavior = #{hBehavior,jdbcType=VARCHAR},
+      h_sign = #{hSign,jdbcType=VARCHAR},
+      h_userid = #{hUserid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

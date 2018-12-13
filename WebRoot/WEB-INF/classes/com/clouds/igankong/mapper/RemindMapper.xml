@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clouds.igankong.mapper.RemindMapper" >
+  <resultMap id="BaseResultMap" type="com.clouds.igankong.po.Remind" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="r_time" property="rTime" jdbcType="VARCHAR" />
+    <result column="r_relate_person" property="rRelatePerson" jdbcType="VARCHAR" />
+    <result column="r_remark" property="rRemark" jdbcType="VARCHAR" />
+    <result column="r_status" property="rStatus" jdbcType="VARCHAR" />
+    <result column="r_openID" property="rOpenid" jdbcType="VARCHAR" />
+    <result column="r_userid" property="rUserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, r_time, r_relate_person, r_remark, r_status, r_openID, r_userid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clouds.igankong.po.RemindExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from remind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from remind
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from remind
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clouds.igankong.po.RemindExample" >
+    delete from remind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clouds.igankong.po.Remind" >
+    insert into remind (ID, r_time, r_relate_person, 
+      r_remark, r_status, r_openID, 
+      r_userid)
+    values (#{id,jdbcType=INTEGER}, #{rTime,jdbcType=VARCHAR}, #{rRelatePerson,jdbcType=VARCHAR}, 
+      #{rRemark,jdbcType=VARCHAR}, #{rStatus,jdbcType=VARCHAR}, #{rOpenid,jdbcType=VARCHAR}, 
+      #{rUserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clouds.igankong.po.Remind" >
+    insert into remind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="rTime != null" >
+        r_time,
+      </if>
+      <if test="rRelatePerson != null" >
+        r_relate_person,
+      </if>
+      <if test="rRemark != null" >
+        r_remark,
+      </if>
+      <if test="rStatus != null" >
+        r_status,
+      </if>
+      <if test="rOpenid != null" >
+        r_openID,
+      </if>
+      <if test="rUserid != null" >
+        r_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rTime != null" >
+        #{rTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rRelatePerson != null" >
+        #{rRelatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="rRemark != null" >
+        #{rRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="rStatus != null" >
+        #{rStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rOpenid != null" >
+        #{rOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="rUserid != null" >
+        #{rUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clouds.igankong.po.RemindExample" resultType="java.lang.Integer" >
+    select count(*) from remind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update remind
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.rTime != null" >
+        r_time = #{record.rTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rRelatePerson != null" >
+        r_relate_person = #{record.rRelatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rRemark != null" >
+        r_remark = #{record.rRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rStatus != null" >
+        r_status = #{record.rStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rOpenid != null" >
+        r_openID = #{record.rOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rUserid != null" >
+        r_userid = #{record.rUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update remind
+    set ID = #{record.id,jdbcType=INTEGER},
+      r_time = #{record.rTime,jdbcType=VARCHAR},
+      r_relate_person = #{record.rRelatePerson,jdbcType=VARCHAR},
+      r_remark = #{record.rRemark,jdbcType=VARCHAR},
+      r_status = #{record.rStatus,jdbcType=VARCHAR},
+      r_openID = #{record.rOpenid,jdbcType=VARCHAR},
+      r_userid = #{record.rUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clouds.igankong.po.Remind" >
+    update remind
+    <set >
+      <if test="rTime != null" >
+        r_time = #{rTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rRelatePerson != null" >
+        r_relate_person = #{rRelatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="rRemark != null" >
+        r_remark = #{rRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="rStatus != null" >
+        r_status = #{rStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rOpenid != null" >
+        r_openID = #{rOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="rUserid != null" >
+        r_userid = #{rUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clouds.igankong.po.Remind" >
+    update remind
+    set r_time = #{rTime,jdbcType=VARCHAR},
+      r_relate_person = #{rRelatePerson,jdbcType=VARCHAR},
+      r_remark = #{rRemark,jdbcType=VARCHAR},
+      r_status = #{rStatus,jdbcType=VARCHAR},
+      r_openID = #{rOpenid,jdbcType=VARCHAR},
+      r_userid = #{rUserid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

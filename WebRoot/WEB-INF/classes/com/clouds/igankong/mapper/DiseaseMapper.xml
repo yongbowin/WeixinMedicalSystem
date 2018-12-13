@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clouds.igankong.mapper.DiseaseMapper" >
+  <resultMap id="BaseResultMap" type="com.clouds.igankong.po.Disease" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="d_openID" property="dOpenid" jdbcType="VARCHAR" />
+    <result column="d_name" property="dName" jdbcType="VARCHAR" />
+    <result column="d_type" property="dType" jdbcType="VARCHAR" />
+    <result column="d_result" property="dResult" jdbcType="VARCHAR" />
+    <result column="d_start_time" property="dStartTime" jdbcType="VARCHAR" />
+    <result column="d_hospital_num" property="dHospitalNum" jdbcType="VARCHAR" />
+    <result column="d_sign" property="dSign" jdbcType="VARCHAR" />
+    <result column="d_userid" property="dUserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, d_openID, d_name, d_type, d_result, d_start_time, d_hospital_num, d_sign, d_userid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clouds.igankong.po.DiseaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from disease
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from disease
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from disease
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clouds.igankong.po.DiseaseExample" >
+    delete from disease
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clouds.igankong.po.Disease" >
+    insert into disease (ID, d_openID, d_name, 
+      d_type, d_result, d_start_time, 
+      d_hospital_num, d_sign, d_userid
+      )
+    values (#{id,jdbcType=INTEGER}, #{dOpenid,jdbcType=VARCHAR}, #{dName,jdbcType=VARCHAR}, 
+      #{dType,jdbcType=VARCHAR}, #{dResult,jdbcType=VARCHAR}, #{dStartTime,jdbcType=VARCHAR}, 
+      #{dHospitalNum,jdbcType=VARCHAR}, #{dSign,jdbcType=VARCHAR}, #{dUserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.clouds.igankong.po.Disease" >
+    insert into disease
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="dOpenid != null" >
+        d_openID,
+      </if>
+      <if test="dName != null" >
+        d_name,
+      </if>
+      <if test="dType != null" >
+        d_type,
+      </if>
+      <if test="dResult != null" >
+        d_result,
+      </if>
+      <if test="dStartTime != null" >
+        d_start_time,
+      </if>
+      <if test="dHospitalNum != null" >
+        d_hospital_num,
+      </if>
+      <if test="dSign != null" >
+        d_sign,
+      </if>
+      <if test="dUserid != null" >
+        d_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dOpenid != null" >
+        #{dOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null" >
+        #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null" >
+        #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dResult != null" >
+        #{dResult,jdbcType=VARCHAR},
+      </if>
+      <if test="dStartTime != null" >
+        #{dStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dHospitalNum != null" >
+        #{dHospitalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dSign != null" >
+        #{dSign,jdbcType=VARCHAR},
+      </if>
+      <if test="dUserid != null" >
+        #{dUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clouds.igankong.po.DiseaseExample" resultType="java.lang.Integer" >
+    select count(*) from disease
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update disease
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dOpenid != null" >
+        d_openID = #{record.dOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dName != null" >
+        d_name = #{record.dName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dType != null" >
+        d_type = #{record.dType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dResult != null" >
+        d_result = #{record.dResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dStartTime != null" >
+        d_start_time = #{record.dStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dHospitalNum != null" >
+        d_hospital_num = #{record.dHospitalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSign != null" >
+        d_sign = #{record.dSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dUserid != null" >
+        d_userid = #{record.dUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update disease
+    set ID = #{record.id,jdbcType=INTEGER},
+      d_openID = #{record.dOpenid,jdbcType=VARCHAR},
+      d_name = #{record.dName,jdbcType=VARCHAR},
+      d_type = #{record.dType,jdbcType=VARCHAR},
+      d_result = #{record.dResult,jdbcType=VARCHAR},
+      d_start_time = #{record.dStartTime,jdbcType=VARCHAR},
+      d_hospital_num = #{record.dHospitalNum,jdbcType=VARCHAR},
+      d_sign = #{record.dSign,jdbcType=VARCHAR},
+      d_userid = #{record.dUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clouds.igankong.po.Disease" >
+    update disease
+    <set >
+      <if test="dOpenid != null" >
+        d_openID = #{dOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null" >
+        d_name = #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null" >
+        d_type = #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dResult != null" >
+        d_result = #{dResult,jdbcType=VARCHAR},
+      </if>
+      <if test="dStartTime != null" >
+        d_start_time = #{dStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dHospitalNum != null" >
+        d_hospital_num = #{dHospitalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dSign != null" >
+        d_sign = #{dSign,jdbcType=VARCHAR},
+      </if>
+      <if test="dUserid != null" >
+        d_userid = #{dUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clouds.igankong.po.Disease" >
+    update disease
+    set d_openID = #{dOpenid,jdbcType=VARCHAR},
+      d_name = #{dName,jdbcType=VARCHAR},
+      d_type = #{dType,jdbcType=VARCHAR},
+      d_result = #{dResult,jdbcType=VARCHAR},
+      d_start_time = #{dStartTime,jdbcType=VARCHAR},
+      d_hospital_num = #{dHospitalNum,jdbcType=VARCHAR},
+      d_sign = #{dSign,jdbcType=VARCHAR},
+      d_userid = #{dUserid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

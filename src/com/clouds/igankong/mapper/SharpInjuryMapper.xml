@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clouds.igankong.mapper.SharpInjuryMapper" >
+  <resultMap id="BaseResultMap" type="com.clouds.igankong.po.SharpInjury" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="s_openID" property="sOpenid" jdbcType="VARCHAR" />
+    <result column="s_place" property="sPlace" jdbcType="VARCHAR" />
+    <result column="s_type" property="sType" jdbcType="VARCHAR" />
+    <result column="s_start_time" property="sStartTime" jdbcType="VARCHAR" />
+    <result column="s_use_status" property="sUseStatus" jdbcType="VARCHAR" />
+    <result column="s_pollution_situ" property="sPollutionSitu" jdbcType="VARCHAR" />
+    <result column="s_blood_poll" property="sBloodPoll" jdbcType="VARCHAR" />
+    <result column="s_glove_status" property="sGloveStatus" jdbcType="VARCHAR" />
+    <result column="s_expose_part" property="sExposePart" jdbcType="VARCHAR" />
+    <result column="s_operate" property="sOperate" jdbcType="VARCHAR" />
+    <result column="s_injury_part" property="sInjuryPart" jdbcType="VARCHAR" />
+    <result column="s_gestation_status" property="sGestationStatus" jdbcType="VARCHAR" />
+    <result column="s_habit_hand" property="sHabitHand" jdbcType="VARCHAR" />
+    <result column="s_injury_degree" property="sInjuryDegree" jdbcType="VARCHAR" />
+    <result column="s_after_handle" property="sAfterHandle" jdbcType="VARCHAR" />
+    <result column="s_witness" property="sWitness" jdbcType="VARCHAR" />
+    <result column="s_treatment" property="sTreatment" jdbcType="VARCHAR" />
+    <result column="s_userid" property="sUserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, s_openID, s_place, s_type, s_start_time, s_use_status, s_pollution_situ, s_blood_poll, 
+    s_glove_status, s_expose_part, s_operate, s_injury_part, s_gestation_status, s_habit_hand, 
+    s_injury_degree, s_after_handle, s_witness, s_treatment, s_userid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clouds.igankong.po.SharpInjuryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sharp_injury
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sharp_injury
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sharp_injury
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clouds.igankong.po.SharpInjuryExample" >
+    delete from sharp_injury
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clouds.igankong.po.SharpInjury" >
+    insert into sharp_injury (ID, s_openID, s_place, 
+      s_type, s_start_time, s_use_status, 
+      s_pollution_situ, s_blood_poll, s_glove_status, 
+      s_expose_part, s_operate, s_injury_part, 
+      s_gestation_status, s_habit_hand, s_injury_degree, 
+      s_after_handle, s_witness, s_treatment, 
+      s_userid)
+    values (#{id,jdbcType=INTEGER}, #{sOpenid,jdbcType=VARCHAR}, #{sPlace,jdbcType=VARCHAR}, 
+      #{sType,jdbcType=VARCHAR}, #{sStartTime,jdbcType=VARCHAR}, #{sUseStatus,jdbcType=VARCHAR}, 
+      #{sPollutionSitu,jdbcType=VARCHAR}, #{sBloodPoll,jdbcType=VARCHAR}, #{sGloveStatus,jdbcType=VARCHAR}, 
+      #{sExposePart,jdbcType=VARCHAR}, #{sOperate,jdbcType=VARCHAR}, #{sInjuryPart,jdbcType=VARCHAR}, 
+      #{sGestationStatus,jdbcType=VARCHAR}, #{sHabitHand,jdbcType=VARCHAR}, #{sInjuryDegree,jdbcType=VARCHAR}, 
+      #{sAfterHandle,jdbcType=VARCHAR}, #{sWitness,jdbcType=VARCHAR}, #{sTreatment,jdbcType=VARCHAR}, 
+      #{sUserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clouds.igankong.po.SharpInjury" >
+    insert into sharp_injury
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sOpenid != null" >
+        s_openID,
+      </if>
+      <if test="sPlace != null" >
+        s_place,
+      </if>
+      <if test="sType != null" >
+        s_type,
+      </if>
+      <if test="sStartTime != null" >
+        s_start_time,
+      </if>
+      <if test="sUseStatus != null" >
+        s_use_status,
+      </if>
+      <if test="sPollutionSitu != null" >
+        s_pollution_situ,
+      </if>
+      <if test="sBloodPoll != null" >
+        s_blood_poll,
+      </if>
+      <if test="sGloveStatus != null" >
+        s_glove_status,
+      </if>
+      <if test="sExposePart != null" >
+        s_expose_part,
+      </if>
+      <if test="sOperate != null" >
+        s_operate,
+      </if>
+      <if test="sInjuryPart != null" >
+        s_injury_part,
+      </if>
+      <if test="sGestationStatus != null" >
+        s_gestation_status,
+      </if>
+      <if test="sHabitHand != null" >
+        s_habit_hand,
+      </if>
+      <if test="sInjuryDegree != null" >
+        s_injury_degree,
+      </if>
+      <if test="sAfterHandle != null" >
+        s_after_handle,
+      </if>
+      <if test="sWitness != null" >
+        s_witness,
+      </if>
+      <if test="sTreatment != null" >
+        s_treatment,
+      </if>
+      <if test="sUserid != null" >
+        s_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sOpenid != null" >
+        #{sOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="sPlace != null" >
+        #{sPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="sType != null" >
+        #{sType,jdbcType=VARCHAR},
+      </if>
+      <if test="sStartTime != null" >
+        #{sStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sUseStatus != null" >
+        #{sUseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sPollutionSitu != null" >
+        #{sPollutionSitu,jdbcType=VARCHAR},
+      </if>
+      <if test="sBloodPoll != null" >
+        #{sBloodPoll,jdbcType=VARCHAR},
+      </if>
+      <if test="sGloveStatus != null" >
+        #{sGloveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sExposePart != null" >
+        #{sExposePart,jdbcType=VARCHAR},
+      </if>
+      <if test="sOperate != null" >
+        #{sOperate,jdbcType=VARCHAR},
+      </if>
+      <if test="sInjuryPart != null" >
+        #{sInjuryPart,jdbcType=VARCHAR},
+      </if>
+      <if test="sGestationStatus != null" >
+        #{sGestationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sHabitHand != null" >
+        #{sHabitHand,jdbcType=VARCHAR},
+      </if>
+      <if test="sInjuryDegree != null" >
+        #{sInjuryDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="sAfterHandle != null" >
+        #{sAfterHandle,jdbcType=VARCHAR},
+      </if>
+      <if test="sWitness != null" >
+        #{sWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="sTreatment != null" >
+        #{sTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="sUserid != null" >
+        #{sUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clouds.igankong.po.SharpInjuryExample" resultType="java.lang.Integer" >
+    select count(*) from sharp_injury
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sharp_injury
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sOpenid != null" >
+        s_openID = #{record.sOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sPlace != null" >
+        s_place = #{record.sPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sType != null" >
+        s_type = #{record.sType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sStartTime != null" >
+        s_start_time = #{record.sStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sUseStatus != null" >
+        s_use_status = #{record.sUseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sPollutionSitu != null" >
+        s_pollution_situ = #{record.sPollutionSitu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sBloodPoll != null" >
+        s_blood_poll = #{record.sBloodPoll,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sGloveStatus != null" >
+        s_glove_status = #{record.sGloveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sExposePart != null" >
+        s_expose_part = #{record.sExposePart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sOperate != null" >
+        s_operate = #{record.sOperate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sInjuryPart != null" >
+        s_injury_part = #{record.sInjuryPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sGestationStatus != null" >
+        s_gestation_status = #{record.sGestationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sHabitHand != null" >
+        s_habit_hand = #{record.sHabitHand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sInjuryDegree != null" >
+        s_injury_degree = #{record.sInjuryDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sAfterHandle != null" >
+        s_after_handle = #{record.sAfterHandle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sWitness != null" >
+        s_witness = #{record.sWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sTreatment != null" >
+        s_treatment = #{record.sTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sUserid != null" >
+        s_userid = #{record.sUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sharp_injury
+    set ID = #{record.id,jdbcType=INTEGER},
+      s_openID = #{record.sOpenid,jdbcType=VARCHAR},
+      s_place = #{record.sPlace,jdbcType=VARCHAR},
+      s_type = #{record.sType,jdbcType=VARCHAR},
+      s_start_time = #{record.sStartTime,jdbcType=VARCHAR},
+      s_use_status = #{record.sUseStatus,jdbcType=VARCHAR},
+      s_pollution_situ = #{record.sPollutionSitu,jdbcType=VARCHAR},
+      s_blood_poll = #{record.sBloodPoll,jdbcType=VARCHAR},
+      s_glove_status = #{record.sGloveStatus,jdbcType=VARCHAR},
+      s_expose_part = #{record.sExposePart,jdbcType=VARCHAR},
+      s_operate = #{record.sOperate,jdbcType=VARCHAR},
+      s_injury_part = #{record.sInjuryPart,jdbcType=VARCHAR},
+      s_gestation_status = #{record.sGestationStatus,jdbcType=VARCHAR},
+      s_habit_hand = #{record.sHabitHand,jdbcType=VARCHAR},
+      s_injury_degree = #{record.sInjuryDegree,jdbcType=VARCHAR},
+      s_after_handle = #{record.sAfterHandle,jdbcType=VARCHAR},
+      s_witness = #{record.sWitness,jdbcType=VARCHAR},
+      s_treatment = #{record.sTreatment,jdbcType=VARCHAR},
+      s_userid = #{record.sUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clouds.igankong.po.SharpInjury" >
+    update sharp_injury
+    <set >
+      <if test="sOpenid != null" >
+        s_openID = #{sOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="sPlace != null" >
+        s_place = #{sPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="sType != null" >
+        s_type = #{sType,jdbcType=VARCHAR},
+      </if>
+      <if test="sStartTime != null" >
+        s_start_time = #{sStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sUseStatus != null" >
+        s_use_status = #{sUseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sPollutionSitu != null" >
+        s_pollution_situ = #{sPollutionSitu,jdbcType=VARCHAR},
+      </if>
+      <if test="sBloodPoll != null" >
+        s_blood_poll = #{sBloodPoll,jdbcType=VARCHAR},
+      </if>
+      <if test="sGloveStatus != null" >
+        s_glove_status = #{sGloveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sExposePart != null" >
+        s_expose_part = #{sExposePart,jdbcType=VARCHAR},
+      </if>
+      <if test="sOperate != null" >
+        s_operate = #{sOperate,jdbcType=VARCHAR},
+      </if>
+      <if test="sInjuryPart != null" >
+        s_injury_part = #{sInjuryPart,jdbcType=VARCHAR},
+      </if>
+      <if test="sGestationStatus != null" >
+        s_gestation_status = #{sGestationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sHabitHand != null" >
+        s_habit_hand = #{sHabitHand,jdbcType=VARCHAR},
+      </if>
+      <if test="sInjuryDegree != null" >
+        s_injury_degree = #{sInjuryDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="sAfterHandle != null" >
+        s_after_handle = #{sAfterHandle,jdbcType=VARCHAR},
+      </if>
+      <if test="sWitness != null" >
+        s_witness = #{sWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="sTreatment != null" >
+        s_treatment = #{sTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="sUserid != null" >
+        s_userid = #{sUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clouds.igankong.po.SharpInjury" >
+    update sharp_injury
+    set s_openID = #{sOpenid,jdbcType=VARCHAR},
+      s_place = #{sPlace,jdbcType=VARCHAR},
+      s_type = #{sType,jdbcType=VARCHAR},
+      s_start_time = #{sStartTime,jdbcType=VARCHAR},
+      s_use_status = #{sUseStatus,jdbcType=VARCHAR},
+      s_pollution_situ = #{sPollutionSitu,jdbcType=VARCHAR},
+      s_blood_poll = #{sBloodPoll,jdbcType=VARCHAR},
+      s_glove_status = #{sGloveStatus,jdbcType=VARCHAR},
+      s_expose_part = #{sExposePart,jdbcType=VARCHAR},
+      s_operate = #{sOperate,jdbcType=VARCHAR},
+      s_injury_part = #{sInjuryPart,jdbcType=VARCHAR},
+      s_gestation_status = #{sGestationStatus,jdbcType=VARCHAR},
+      s_habit_hand = #{sHabitHand,jdbcType=VARCHAR},
+      s_injury_degree = #{sInjuryDegree,jdbcType=VARCHAR},
+      s_after_handle = #{sAfterHandle,jdbcType=VARCHAR},
+      s_witness = #{sWitness,jdbcType=VARCHAR},
+      s_treatment = #{sTreatment,jdbcType=VARCHAR},
+      s_userid = #{sUserid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

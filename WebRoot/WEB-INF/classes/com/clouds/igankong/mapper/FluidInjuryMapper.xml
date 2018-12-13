@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.clouds.igankong.mapper.FluidInjuryMapper" >
+  <resultMap id="BaseResultMap" type="com.clouds.igankong.po.FluidInjury" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="f_openID" property="fOpenid" jdbcType="VARCHAR" />
+    <result column="f_place" property="fPlace" jdbcType="VARCHAR" />
+    <result column="f_type" property="fType" jdbcType="VARCHAR" />
+    <result column="f_blood_status" property="fBloodStatus" jdbcType="VARCHAR" />
+    <result column="f_expose_part" property="fExposePart" jdbcType="VARCHAR" />
+    <result column="f_status" property="fStatus" jdbcType="VARCHAR" />
+    <result column="f_protective_status" property="fProtectiveStatus" jdbcType="VARCHAR" />
+    <result column="f_expose_reason" property="fExposeReason" jdbcType="VARCHAR" />
+    <result column="f_touch_time" property="fTouchTime" jdbcType="VARCHAR" />
+    <result column="f_desc" property="fDesc" jdbcType="VARCHAR" />
+    <result column="f_witness" property="fWitness" jdbcType="VARCHAR" />
+    <result column="f_treatment" property="fTreatment" jdbcType="VARCHAR" />
+    <result column="f_userid" property="fUserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, f_openID, f_place, f_type, f_blood_status, f_expose_part, f_status, f_protective_status, 
+    f_expose_reason, f_touch_time, f_desc, f_witness, f_treatment, f_userid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.clouds.igankong.po.FluidInjuryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fluid_injury
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fluid_injury
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fluid_injury
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.clouds.igankong.po.FluidInjuryExample" >
+    delete from fluid_injury
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.clouds.igankong.po.FluidInjury" >
+    insert into fluid_injury (ID, f_openID, f_place, 
+      f_type, f_blood_status, f_expose_part, 
+      f_status, f_protective_status, f_expose_reason, 
+      f_touch_time, f_desc, f_witness, 
+      f_treatment, f_userid)
+    values (#{id,jdbcType=INTEGER}, #{fOpenid,jdbcType=VARCHAR}, #{fPlace,jdbcType=VARCHAR}, 
+      #{fType,jdbcType=VARCHAR}, #{fBloodStatus,jdbcType=VARCHAR}, #{fExposePart,jdbcType=VARCHAR}, 
+      #{fStatus,jdbcType=VARCHAR}, #{fProtectiveStatus,jdbcType=VARCHAR}, #{fExposeReason,jdbcType=VARCHAR}, 
+      #{fTouchTime,jdbcType=VARCHAR}, #{fDesc,jdbcType=VARCHAR}, #{fWitness,jdbcType=VARCHAR}, 
+      #{fTreatment,jdbcType=VARCHAR}, #{fUserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clouds.igankong.po.FluidInjury" >
+    insert into fluid_injury
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fOpenid != null" >
+        f_openID,
+      </if>
+      <if test="fPlace != null" >
+        f_place,
+      </if>
+      <if test="fType != null" >
+        f_type,
+      </if>
+      <if test="fBloodStatus != null" >
+        f_blood_status,
+      </if>
+      <if test="fExposePart != null" >
+        f_expose_part,
+      </if>
+      <if test="fStatus != null" >
+        f_status,
+      </if>
+      <if test="fProtectiveStatus != null" >
+        f_protective_status,
+      </if>
+      <if test="fExposeReason != null" >
+        f_expose_reason,
+      </if>
+      <if test="fTouchTime != null" >
+        f_touch_time,
+      </if>
+      <if test="fDesc != null" >
+        f_desc,
+      </if>
+      <if test="fWitness != null" >
+        f_witness,
+      </if>
+      <if test="fTreatment != null" >
+        f_treatment,
+      </if>
+      <if test="fUserid != null" >
+        f_userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fOpenid != null" >
+        #{fOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPlace != null" >
+        #{fPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fBloodStatus != null" >
+        #{fBloodStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fExposePart != null" >
+        #{fExposePart,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null" >
+        #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fProtectiveStatus != null" >
+        #{fProtectiveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fExposeReason != null" >
+        #{fExposeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="fTouchTime != null" >
+        #{fTouchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDesc != null" >
+        #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fWitness != null" >
+        #{fWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="fTreatment != null" >
+        #{fTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="fUserid != null" >
+        #{fUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.clouds.igankong.po.FluidInjuryExample" resultType="java.lang.Integer" >
+    select count(*) from fluid_injury
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fluid_injury
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fOpenid != null" >
+        f_openID = #{record.fOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPlace != null" >
+        f_place = #{record.fPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fType != null" >
+        f_type = #{record.fType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBloodStatus != null" >
+        f_blood_status = #{record.fBloodStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fExposePart != null" >
+        f_expose_part = #{record.fExposePart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fStatus != null" >
+        f_status = #{record.fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProtectiveStatus != null" >
+        f_protective_status = #{record.fProtectiveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fExposeReason != null" >
+        f_expose_reason = #{record.fExposeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fTouchTime != null" >
+        f_touch_time = #{record.fTouchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDesc != null" >
+        f_desc = #{record.fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fWitness != null" >
+        f_witness = #{record.fWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fTreatment != null" >
+        f_treatment = #{record.fTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fUserid != null" >
+        f_userid = #{record.fUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fluid_injury
+    set ID = #{record.id,jdbcType=INTEGER},
+      f_openID = #{record.fOpenid,jdbcType=VARCHAR},
+      f_place = #{record.fPlace,jdbcType=VARCHAR},
+      f_type = #{record.fType,jdbcType=VARCHAR},
+      f_blood_status = #{record.fBloodStatus,jdbcType=VARCHAR},
+      f_expose_part = #{record.fExposePart,jdbcType=VARCHAR},
+      f_status = #{record.fStatus,jdbcType=VARCHAR},
+      f_protective_status = #{record.fProtectiveStatus,jdbcType=VARCHAR},
+      f_expose_reason = #{record.fExposeReason,jdbcType=VARCHAR},
+      f_touch_time = #{record.fTouchTime,jdbcType=VARCHAR},
+      f_desc = #{record.fDesc,jdbcType=VARCHAR},
+      f_witness = #{record.fWitness,jdbcType=VARCHAR},
+      f_treatment = #{record.fTreatment,jdbcType=VARCHAR},
+      f_userid = #{record.fUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clouds.igankong.po.FluidInjury" >
+    update fluid_injury
+    <set >
+      <if test="fOpenid != null" >
+        f_openID = #{fOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPlace != null" >
+        f_place = #{fPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        f_type = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fBloodStatus != null" >
+        f_blood_status = #{fBloodStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fExposePart != null" >
+        f_expose_part = #{fExposePart,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null" >
+        f_status = #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fProtectiveStatus != null" >
+        f_protective_status = #{fProtectiveStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fExposeReason != null" >
+        f_expose_reason = #{fExposeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="fTouchTime != null" >
+        f_touch_time = #{fTouchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDesc != null" >
+        f_desc = #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fWitness != null" >
+        f_witness = #{fWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="fTreatment != null" >
+        f_treatment = #{fTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="fUserid != null" >
+        f_userid = #{fUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clouds.igankong.po.FluidInjury" >
+    update fluid_injury
+    set f_openID = #{fOpenid,jdbcType=VARCHAR},
+      f_place = #{fPlace,jdbcType=VARCHAR},
+      f_type = #{fType,jdbcType=VARCHAR},
+      f_blood_status = #{fBloodStatus,jdbcType=VARCHAR},
+      f_expose_part = #{fExposePart,jdbcType=VARCHAR},
+      f_status = #{fStatus,jdbcType=VARCHAR},
+      f_protective_status = #{fProtectiveStatus,jdbcType=VARCHAR},
+      f_expose_reason = #{fExposeReason,jdbcType=VARCHAR},
+      f_touch_time = #{fTouchTime,jdbcType=VARCHAR},
+      f_desc = #{fDesc,jdbcType=VARCHAR},
+      f_witness = #{fWitness,jdbcType=VARCHAR},
+      f_treatment = #{fTreatment,jdbcType=VARCHAR},
+      f_userid = #{fUserid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
